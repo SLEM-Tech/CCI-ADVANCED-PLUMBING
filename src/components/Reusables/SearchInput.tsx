@@ -50,7 +50,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
 
 	return (
     <div
-      className={`flex items-center border rounded-sm overflow-hidden ${className}`}
+      className={`flex items-center rounded-xl overflow-hidden ${className}`}
     >
       {isLoading ? (
         <ImSpinner2 className="animate-spin mx-auto" />

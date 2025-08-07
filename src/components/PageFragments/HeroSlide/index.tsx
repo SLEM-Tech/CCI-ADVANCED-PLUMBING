@@ -9,7 +9,7 @@ interface HeroSlideProps {
 
 export const HeroSlide = ({ featureMessage, imgPath }: HeroSlideProps) => {
   return (
-    <section className="relative h-[calc(100vh-80px)] max-h-[600px] sm:max-h-none lg:h-[calc(100vh-130px)] w-full overflow-hidden">
+    <section className="relative h-[400px] sm:h-[450px] md:h-[500px] lg:h-[calc(100vh-130px)] max-h-[600px] w-full overflow-hidden">
       {/* Background Image */}
       {typeof imgPath === "string" ? (
         <Image
@@ -27,7 +27,7 @@ export const HeroSlide = ({ featureMessage, imgPath }: HeroSlideProps) => {
           fill
           quality={100}
           sizes="100vw"
-          className="object-cover z-0"
+          className="object-cover z-0 xs:h-[50%] md:h-[60%] lg:[full]"
         />
       )}
 

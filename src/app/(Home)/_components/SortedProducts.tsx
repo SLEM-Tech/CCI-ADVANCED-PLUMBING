@@ -10,7 +10,7 @@ import {
 import Carousel from "@src/components/Reusables/Carousel";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
-import { IoChevronForward } from "react-icons/io5";
+
 
 export const Loader = () => (
 	<>
@@ -156,7 +156,7 @@ const SortedProducts = () => {
                     />
                   </span>
 
-                  <div className="xs:hidden flex items-center justify-center ">
+                  <div className="xs:hidden md:block flex items-center justify-center ">
                     <Link
                       href={`${
                         "/category/" +
@@ -166,11 +166,11 @@ const SortedProducts = () => {
                       }`}
                       className="mt-2 text-sm font-medium cursor-pointer text-[#303030] hover:underline"
                     >
-                      view all
+                      View all
                     </Link>
-                    <div className="mt-2 text-left">
+                    {/* <div className="mt-2 text-left">
                       <IoChevronForward color="#7fc561" />
-                    </div>
+                    </div> */}
                   </div>
                 </div>
                 {/* Show loader when category products are loading */}

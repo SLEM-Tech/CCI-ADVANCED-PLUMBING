@@ -24,18 +24,18 @@ export const metadata: Metadata = {
 
 const page = () => {
 	return (
-		<AppLayout>
-			<HeroSection />
-			
-			<main className='pt-5 lg:pt-12 md:px-8 mx-auto max-w-[1256px] sm:mt-3 mb-5'>
-				<TopCategorySection />
-				{/* <AllCategorySection /> */}
-				<div className='mt-4 sm:mt-12'>
-					<SortedProducts />
-				</div>
-			</main>
-		</AppLayout>
-	);
+    <AppLayout>
+      <div className="xs:mt-[158px] md:mt-[100px] ">
+        <HeroSection />
+      </div>
+      <div>
+        <TopCategorySection />
+      </div>
+      <div>
+        <SortedProducts />
+      </div>
+    </AppLayout>
+  );
 };
 
 export default page;

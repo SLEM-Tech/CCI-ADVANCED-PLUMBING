@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { CartIconSvg, UserIconSvg } from "../SvgIcons";
+import { FiUser } from "react-icons/fi";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import Drawer from "react-modern-drawer";
@@ -53,7 +54,7 @@ const Header = () => {
   const isUserPathname = pathname.includes("user");
   const [drawerVisible, setDrawerVisible] = useState(false);
   const [isMobileNav, setIsMobileNav] = useState(false);
-  const [isUserClick, setIsUserClick] = useState(false);
+  const [isUserClick, setIsUserClick] = useState(true);
   const [isSearchLoading, setIsSearchLoading] = useState(false);
   const { token, email } = useToken();
   const [searchValue, setSearchValue] = useState("");
@@ -246,7 +247,7 @@ const Header = () => {
             <p className="w-full">Delivery in 10 minutes</p>
           </div>
 
-          <div className="flex text-xs gap-5 xs:justify-center xs:w-full ">
+          <div className="flex text-xs gap-5 xs:justify-center lg:justify-end xs:w-full ">
             <Link className="flex gap-1 items-center" href={""}>
               <MdOutlineLocationOn color="#fff" size={20} />
               <p>Deliver to 423651</p>
@@ -264,16 +265,21 @@ const Header = () => {
 
         {/* white background header */}
 
-        <div className="flex items-center justify-around w-full py-4 max-w-[1400px] z-30 px-14 xs:px-1 md:px-14">
+        <div className="flex items-center md:justify-around xs:justify-between w-full py-4 max-w-[1400px] z-30 px-4 md:px-14">
           {/* Flex section 1 */}
-          <div
-            onClick={toggleDrawer}
-            className="flex items-center gap-12 cursor-pointer"
-          >
-            <BiMenuAltLeft color="#88c96f" size={40} />
+          <div className="flex items-center justify-center">
+            <Link href="/" className="">
+              <LogoImage className="w-[75px] " />
+            </Link>
+            <div
+              onClick={toggleDrawer}
+              className="flex basis-1/4 items-center gap-12 cursor-pointer"
+            >
+              <BiMenuAltLeft color="#88c96f" size={40} />
+            </div>
           </div>
           {/* Flex section 2 */}
-          <div className="flex h-10 col-span-2">
+          <div className="basis-1/2 xs:hidden md:block flex h-10 col-span-2">
             <SearchInput
               className="flex-1 text-base text-black/70 pl-4 pr-2 !py-1.5 h-[2.4rem] bg-[#f3f9fb] !rounded-sm outline-none focus:border-[#f3f9fb] focus:ring-1 transition"
               placeholder="Search essentials, groceries and more..."
@@ -284,256 +290,132 @@ const Header = () => {
             />
           </div>
           {/* Flex section 3 */}
-          <div className="flex justify-end gap-1">
-            <div
-              className="flex gap-2 justify-center items-center cursor-pointer border-r-1"
-              onClick={() => router.push("/cart")}
-            >
-              {typeof window !== "undefined" && (
-                <div className="flex relative justify-center items-center rounded-full size-9 p-2 text-sm">
-                  <span className="absolute top-[-2px] right-[1] size-4 text-[#88c96f] text-xs shadow-lg flex justify-center items-center rounded-full">
-                    {totalItems === 0 ? "" : totalItems}
-                  </span>
-                  <div className="flex items-center justify-right gap-1 ">
-                    <PiShoppingCartSimple className="fill-[#88c96f] size-6" />
-                    <p className="xs:hidden font-semibold text-sm text-[#88c96f]">
-                      Cart
-                    </p>
-                  </div>
-                </div>
-              )}
-              <span
-                className="truncate text-sm text-[#88c96f] font-semibold w-16 overflow-hidden"
-                title={`₦${calculateSubtotal().toString()}`}
-              >
-                <FormatMoney2 value={calculateSubtotal()} />
-              </span>
-            </div>
 
-            <div className="flex gap-2 justify-center items-center">
-              {wc_customer_info?.shipping?.address_2 ? (
-                <Picture
-                  src={wc_customer_info?.shipping?.address_2}
-                  alt={"user-image"}
-                  loading="eager"
-                  className="size-10 rounded-full object-contain"
-                />
-              ) : firstName ? (
-                <div className="flex justify-center items-center w-12 h-12">
-                  <span className="flex justify-center items-center w-10 h-10 rounded-full bg-gray-300 text-white text-xl font-semibold">
+          <div className="flex basis-1/4 items-center justify-end gap-4 relative">
+            {/* Login / Avatar */}
+            <div
+              className="flex items-center gap-1 text-[#88c96f] cursor-pointer"
+              onClick={handleisMobileNavClick}
+            >
+              {firstName ? (
+                wc_customer_info?.shipping?.address_2 ? (
+                  <img
+                    src={wc_customer_info.shipping.address_2}
+                    alt="user-avatar"
+                    className="w-6 h-6 rounded-full object-cover"
+                  />
+                ) : (
+                  <span className="w-6 h-6 flex items-center justify-center bg-gray-300 text-white rounded-full text-sm font-bold">
                     {getFirstCharacter(firstName)}
                   </span>
-                </div>
+                )
               ) : (
-                <div className="flex">
-                  <UserIconSvg className="size-6 text-[#88c96f] font-bold" />
-                </div>
+                <FiUser className="w-5 h-5" />
               )}
+              <span className="text-sm font-medium">
+                {firstName || "Login"}
+              </span>
+              {firstName && <SlArrowDown className="text-sm ml-1" />}
+            </div>
 
-              <div className="flex flex-col text-[#88c96f] font-semibold text-sm">
-                {firstName ? (
+            {/* Dropdown */}
+            <AnimatePresence>
+              {isUserClick && firstName && (
+                <motion.nav
+                  initial={{ y: -10, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={{ y: -10, opacity: 0 }}
+                  className="absolute top-8 right-14 bg-white shadow-xl rounded-xl w-40 py-2 z-50"
+                >
+                  {mobileDropDownLinks?.map((item, i) => (
+                    <Link
+                      key={i}
+                      href={item.href}
+                      className={`flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-100 ${
+                        pathname === item.href
+                          ? "text-[#88c96f]"
+                          : "text-gray-700"
+                      }`}
+                    >
+                      {item.icon}
+                      {item.label}
+                    </Link>
+                  ))}
                   <div
-                    className="flex gap-1.5 items-center cursor-pointer group relative"
-                    // onClick={() => router.push("/user/dashboard")}
-                    onClick={handleisMobileNavClick}
+                    onClick={signOut}
+                    className="text-sm text-gray-500 hover:text-[#88c96f] text-center mt-2 cursor-pointer border-t pt-2"
                   >
-                    <span
-                      title={firstName}
-                      className="line-clamp-1 overflow-y-hidden w-12"
-                    >
-                      {firstName}
-                    </span>
-                    <SlArrowDown className="text-primary group-hover:text-primary group-hover:translate-y-[2px] transition duration-400 ease-out" />
-                    <AnimatePresence>
-                      {isUserClick && (
-                        <motion.nav
-                          initial={{ y: -100, opacity: 0 }}
-                          animate={{ y: 0, opacity: 1 }}
-                          exit={{ y: -100, opacity: 0 }}
-                          className="flex flex-col text-black gap-3 pt-4 w-[9rem] bg-white absolute right-0 top-[1.5rem] rounded-2xl overflow-hidden cursor-pointer duration-500 ease-out drop-shadow-xl z-50 transition font-light"
-                        >
-                          {mobileDropDownLinks.map((item, i) => (
-                            <Link
-                              key={i}
-                              href={item.href}
-                              className={`${
-                                pathname === item.href
-                                  ? "text-primary"
-                                  : "text-black"
-                              } flex gap-1.5 px-4 items-center hover:text-primary`}
-                            >
-                              {item.icon}
-                              {item.label}
-                            </Link>
-                          ))}
-                          <span
-                            onClick={() => signOut()}
-                            className="text-center pt-1 pb-2 text-gray-500 hover:text-primary border-t"
-                          >
-                            Log Out
-                          </span>
-                        </motion.nav>
-                      )}
-                    </AnimatePresence>
+                    Log Out
                   </div>
-                ) : (
-                  <div className=" flex flex-col">
-                    <span
-                      className="cursor-pointer transition"
-                      onClick={() => router.push("/user/login")}
-                    >
-                      Log In
-                    </span>
-                  </div>
+                </motion.nav>
+              )}
+            </AnimatePresence>
+
+            {/* Divider */}
+            <div className="w-px h-6 bg-gray-300" />
+
+            {/* Cart */}
+            <div
+              className="relative flex items-center gap-1 text-[#88c96f] cursor-pointer"
+              onClick={() => router.push("/cart")}
+            >
+              <div className="relative">
+                <PiShoppingCartSimple className="size-5" />
+                {totalItems > 0 && (
+                  <span className="absolute -top-1 -right-2 bg-[#88c96f] text-white text-xs w-4 h-4 flex items-center justify-center rounded-full">
+                    {totalItems}
+                  </span>
                 )}
               </div>
+              <span className="text-sm font-medium ml-2">Cart</span>
             </div>
+
+            <Dropdown>
+              <DropdownTrigger>
+                <button
+                  type="button"
+                  className="bg-white border border-[#88c96f] hover:bg-black cursor-pointer transition-all duration-300 group text-[#88c96f] text-lg group-hover:text-white rounded-full size-7"
+                >
+                  {baseCurrency?.symbol}
+                </button>
+              </DropdownTrigger>
+
+              <DropdownMenu
+                aria-label="Select Base Currency"
+                selectionMode="single"
+                selectedKeys={new Set([selectedCurrency])}
+                onSelectionChange={(keys) => {
+                  handleCurrencyChange(keys);
+                }}
+                className="bg-white rounded-md pb-4 text-sm lg:text-base"
+              >
+                {currencyOptions.map((currency) => {
+                  const isSelected = selectedCurrency === currency.code;
+                  return (
+                    <DropdownItem
+                      key={currency.code}
+                      value={currency.code}
+                      className={`w-fit ${isSelected ? "text-[#88c96f]" : ""}`}
+                    >
+                      {`${currency.country} | ${currency.code} (${currency.symbol})`}
+                    </DropdownItem>
+                  );
+                })}
+              </DropdownMenu>
+            </Dropdown>
           </div>
         </div>
 
-        {/* Mobile */}
-        {/* <div className="flex flex-col items-center w-full slg:hidden px-2 xs:px-4 py-4">
-          <div className="flex items-center w-full justify-between">
-            <div className="flex items-center gap-1">
-              <GiHamburgerMenu
-                onClick={toggleDrawer}
-                className="text-3xl text-primary hover:scale-105 transition-[.5]"
-              />
-              <Link href="/" className="col-span-1">
-                <LogoImage className="w-[60px] h-fit" />
-              </Link>
-            </div>
-
-            <div className="flex gap-4 justify-center items-center cursor-pointer">
-              <Dropdown>
-                <DropdownTrigger className="">
-                  <button
-                    type="button"
-                    className="bg-white border border-primary hover:bg-black cursor-pointer transition-[.4] group text-primary text-xl group-hover:text-white rounded-full p-0 size-8"
-                  >
-                    {baseCurrency?.symbol}
-                  </button>
-                </DropdownTrigger>
-
-                <DropdownMenu
-                  aria-label="Select Base Currency"
-                  selectionMode="single"
-                  selectedKeys={new Set([selectedCurrency])}
-                  onSelectionChange={(keys) => {
-                    handleCurrencyChange(keys);
-                  }}
-                  className="bg-white rounded-md pb-4 text-sm lg:text-base"
-                >
-                  {currencyOptions.map((currency) => {
-                    const isSelected = selectedCurrency === currency.code;
-                    return (
-                      <DropdownItem
-                        key={currency.code}
-                        value={currency.code}
-                        className={`w-fit ${isSelected ? "text-primary" : ""}`}
-                      >
-                        {`${currency.country} | ${currency.code} (${currency.symbol})`}
-                      </DropdownItem>
-                    );
-                  })}
-                </DropdownMenu>
-              </Dropdown>
-              {firstName ? (
-                <div
-                  className="flex gap-1.5 items-center h-full cursor-pointer group relative"
-                  onClick={handleisMobileNavClick}
-                >
-                  {wc_customer_info?.shipping?.address_2 ? (
-                    <Picture
-                      src={wc_customer_info?.shipping?.address_2}
-                      alt={"user-image"}
-                      loading="eager"
-                      className="w-8 h-8 rounded-full object-contain"
-                    />
-                  ) : (
-                    <span className="flex justify-center items-center w-8 h-8 p-4 rounded-full bg-gray-300 text-white text-xl font-semibold">
-                      {getFirstCharacter(firstName)}
-                    </span>
-                  )}
-
-                  <SlArrowDown className="text-primary text-sm group-hover:text-primary group-hover:translate-y-[2px] transition duration-400 ease-out" />
-                  <AnimatePresence>
-                    {isUserClick && (
-                      <motion.nav
-                        initial={{ y: -100, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        exit={{ y: -100, opacity: 0 }}
-                        className="flex flex-col text-black gap-3 pt-4 w-[9rem] bg-white absolute -left-12 top-[1.5rem] rounded-2xl overflow-hidden cursor-pointer duration-500 ease-out drop-shadow-xl z-50 transition font-light"
-                      >
-                        {mobileDropDownLinks.map((item, i) => (
-                          <div
-                            key={i}
-                            className="flex gap-2 px-4 items-center text-xs"
-                          >
-                            {item.icon}
-                            <Link
-                              href={item.href}
-                              className={`${
-                                pathname === item.href
-                                  ? "text-primary"
-                                  : "text-black"
-                              } hover:text-primary`}
-                            >
-                              {item.label}
-                            </Link>
-                          </div>
-                        ))}
-                        <span
-                          onClick={() => signOut()}
-                          className="text-center text-xs pt-1 pb-2 text-gray-500 hover:text-primary border-t"
-                        >
-                          Log Out
-                        </span>
-                      </motion.nav>
-                    )}
-                  </AnimatePresence>
-                </div>
-              ) : (
-                <UserIconSvg
-                  onClick={() => router.push("/user/login")}
-                  className="w-6 h-6"
-                />
-              )}
-
-              <div
-                className="flex gap-2 justify-center items-center cursor-pointer"
-                onClick={() => router.push("/cart")}
-              >
-                {typeof window !== "undefined" && (
-                  <div className="flex relative justify-center items-center rounded-full size-9 p-2 text-sm border">
-                    <span className="absolute -top-1 -right-1 size-4 bg-primary text-white text-xs shadow-lg flex justify-center items-center rounded-full">
-                      {totalItems}
-                    </span>
-                    <CartIconSvg className="fill-primary size-5" />
-                  </div>
-                )}
-                <span
-                  className={`truncate ${
-                    calculateSubtotal() > 0 ? "w-16" : ""
-                  } text-sm font-semibold overflow-hidden`}
-                  title={`₦${calculateSubtotal().toString()}`}
-                >
-                  <FormatMoney2 value={calculateSubtotal()} />
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className="flex w-full h-10 mt-2 px-1">
-            <SearchInput
-              className="flex-1 text-base text-black/70 pl-4 pr-2 !py-1.5 h-[2.8rem] bg-gray-100/30 !rounded-full outline-none focus:border-primary focus:ring-1 transition"
-              placeholder="Search for products"
-              searchValue={searchValue}
-              setSearchQuery={setSearchValue}
-              onSearch={handleSearch}
-              isLoading={false}
-            />
-          </div>
-        </div> */}
+        <div className="xs:block md:hidden w-full xs:mt-[-10px] xs:my-6 h-10 px-4">
+          <SearchInput
+            className="flex-1 text-base text-black/70 pl-4 pr-2 !py-1.5 h-[2.8rem] bg-gray-100/30 !rounded-full outline-none focus:border-[#88c96f] focus:ring-1 transition"
+            placeholder="Search for products"
+            searchValue={searchValue}
+            setSearchQuery={setSearchValue}
+            onSearch={handleSearch}
+            isLoading={false}
+          />
+        </div>
       </header>
 
       <Drawer

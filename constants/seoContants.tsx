@@ -1,6 +1,6 @@
-const websiteUrl = "https://nest-wheel-auto.com";
+const websiteUrl = "https://cci-advanced-plumbing.vercel.app/";
 export const websiteName =
-  "John-and-sons-innovation-technology-services-company-limited";
+  "CCI Advanced Plumbing";
 export const SEODATA = {
 	defaultOGImage: ``,
 	default: {

@@ -124,7 +124,7 @@ const Footer = () => {
     <footer className="bg-white w-full py-2 flex flex-col item-center border-t-[3px] border-[#54b22c]">
       <div className="mx-auto max-w-[1400px] w-full hidden slg:block">
         <section className="flex justify-center gap-16 mt-2">
-          <div className="flex flex-col gap-4 w-[80%]">
+          <div className="flex flex-col gap-4 w-[80%] ml-[90px]">
             <Link href="/" className="">
               <LogoImage className="w-[75px] " />
             </Link>
@@ -163,7 +163,7 @@ const Footer = () => {
               <Link href="/" className="">
                 <LogoImage className="w-[75px] " />
               </Link>
-              <p className="text-secondary-300 text-xs sm:text-base leading-[1.6] font-[400]">
+              <p className="text-secondary-300 sm:mr-[60px] text-xs sm:text-base leading-[1.6] font-[400]">
                 ..The best store for you!
               </p>
             </div>
@@ -192,8 +192,8 @@ const Footer = () => {
       </div>
 
       <div className="mx-auto w-full max-w-[1156px]">
-        <div className="flex items-center justify-between py-2">
-          <div className="text-secondary-500 text-[8px] sm:text-[10px] slg:text-xs font-[400] leading-[1.2]">
+        <div className="flex items-center justify-between py-2 px-2">
+          <div className="text-secondary-500 xs:max-w-[250px] lg:max-w-full text-[8px] sm:text-[10px] slg:text-xs font-[400] leading-[1.2]">
             Copyright&nbsp;@ {currentYear}&nbsp;{CompanyName} Alright Reserved.
           </div>
           <div className="flex gap-1">

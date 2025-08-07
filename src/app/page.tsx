@@ -10,16 +10,22 @@ import { TopCategorySection } from "@src/components/PageFragments/TopCategory";
 
 const { description, title } = SEODATA.home;
 export const metadata: Metadata = {
-	title: title,
-	description: description,
-	icons: SEODATA.defaultOGImage,
-	openGraph: {
-		images: [
-			{
-				url: SEODATA.defaultOGImage,
-			},
-		],
-	},
+  title: {
+    absolute: "CCI Advanced Plumbing Tech and Technical Company Ltd",
+    default: "CCI Advanced Plumbing Tech and Technical Company Ltd",
+    template: "",
+  },
+  description: description,
+  icons: {
+    icon: "/favicon.png", // or "/favicon."
+  },
+  openGraph: {
+    images: [
+      {
+        url: SEODATA.defaultOGImage,
+      },
+    ],
+  },
 };
 
 const page = () => {

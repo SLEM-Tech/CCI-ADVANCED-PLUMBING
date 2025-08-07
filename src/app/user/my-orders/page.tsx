@@ -104,7 +104,7 @@ const Page = () => {
 													<td className='px-5 py-3 whitespace-nowrap text-right text-sm'>
 														<Link
 															href={`/order/${order.id}`}
-															className='px-3 py-1 bg-primary w-fit mx-auto text-xs flex justify-center text-white hover:bg-primary hover:text-white transition-all font-semibold rounded-full cursor-pointer'
+															className='px-3 py-1 bg-[#54b22c] w-fit mx-auto text-xs flex justify-center text-white hover:bg-[#54b22c] hover:text-white transition-all font-semibold rounded-full cursor-pointer'
 														>
 															Details
 														</Link>

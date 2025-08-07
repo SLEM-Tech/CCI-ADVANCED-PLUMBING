@@ -101,6 +101,7 @@ const Header = () => {
 
   const { data: customer, isLoading, isError } = useCustomer("");
   const wc_customer2_info: Woo_Customer_Type[] = customer;
+  console.log(wc_customer2_info);
   const wc_customer_info: Woo_Customer_Type | undefined =
     filterCustomersByEmail(wc_customer2_info, email);
 
@@ -265,7 +266,7 @@ const Header = () => {
 
         {/* white background header */}
 
-        <div className="flex items-center md:justify-around xs:justify-between w-full py-4 max-w-[1400px] z-30 px-4 md:px-14">
+        <div className="flex items-center md:justify-around xs:justify-between w-full py-4 max-w-[1400px] z-30 xs:pr-6 md:px-14">
           {/* Flex section 1 */}
           <div className="flex items-center justify-center">
             <Link href="/" className="">
@@ -295,7 +296,13 @@ const Header = () => {
             {/* Login / Avatar */}
             <div
               className="flex items-center gap-1 text-[#88c96f] cursor-pointer"
-              onClick={handleisMobileNavClick}
+              onClick={() => {
+                if (!firstName) {
+                  router.push("/user/login");
+                } else {
+                  handleisMobileNavClick();
+                }
+              }}
             >
               {firstName ? (
                 wc_customer_info?.shipping?.address_2 ? (

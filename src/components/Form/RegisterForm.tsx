@@ -105,7 +105,7 @@ const RegisterForm = () => {
 			<h3 className='text-sm sm:text-base md:text-2xl text-black text-center'>
 				Email was sent to your mail to continue registration
 			</h3>
-			<h3 className='hover:underline text-xs sm:text-sm md:text-base cursor-pointer hover:text-primary'>
+			<h3 className='hover:underline text-xs sm:text-sm md:text-base cursor-pointer hover:text-[#54b22c]'>
 				Click here to go back to registration page
 			</h3>
 		</>
@@ -113,7 +113,7 @@ const RegisterForm = () => {
 
 	return (
 		<>
-			<div className='flex flex-col bg-white w-full max-w-[32rem] pt-3 pb-5 md:pb-10 px-3 md:px-10 shadow-lg rounded-xl'>
+			<div className='flex flex-col bg-white w-full xs:mt-20 md:mt-2 xs:h-[50%] max-w-[32rem] pt-3 pb-5 md:pb-10 px-3 md:px-10 shadow-lg rounded-xl'>
 				<h4 className='text-base md:text-2xl uppercase font-[500]'>Register</h4>
 				<FormikProvider value={formik}>
 					<Form className='flex flex-col gap-2 md:gap-3'>
@@ -247,9 +247,9 @@ const RegisterForm = () => {
 									onClick={togglePasswordVisibility}
 								>
 									{showPassword ? (
-										<FaEyeSlash className='text-primary' />
+										<FaEyeSlash className='text-[#54b22c]' />
 									) : (
-										<FaEye className='text-primary' />
+										<FaEye className='text-[#54b22c]' />
 									)}
 								</span>
 							</div>
@@ -257,10 +257,10 @@ const RegisterForm = () => {
 
 						<button
 							type='submit'
-							className={`w-full flex items-center justify-center py-2 md:py-3 text-sm md:text-base mt-3 md:mt-0 transition text-white rounded-sm mb-2 hover:bg-primary ${
+							className={`w-full flex items-center justify-center py-2 md:py-3 text-sm md:text-base mt-3 md:mt-0 transition text-white rounded-sm mb-2 hover:bg-[#54b22c] ${
 								formik.isValid
-									? "bg-primary cursor-pointer"
-									: "bg-primary/60 cursor-not-allowed"
+									? "bg-[#54b22c] cursor-pointer"
+									: "bg-[#54b22c]/60 cursor-not-allowed"
 							}`}
 							disabled={!formik.isValid || formik.isSubmitting}
 						>
@@ -275,7 +275,7 @@ const RegisterForm = () => {
 							<span>Already Have account?&nbsp;</span>
 							<span
 								onClick={() => router.push("/user/login")}
-								className='text-primary font-semibold hover:underline cursor-pointer transition'
+								className='text-[#54b22c] font-semibold hover:underline cursor-pointer transition'
 							>
 								Login Here
 							</span>

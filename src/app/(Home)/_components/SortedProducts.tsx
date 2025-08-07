@@ -10,7 +10,7 @@ import {
 import Carousel from "@src/components/Reusables/Carousel";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
-import { IoChevronForward } from "react-icons/io5";
+
 
 export const Loader = () => (
 	<>
@@ -32,182 +32,132 @@ export const MainLoader = () => (
 );
 
 const SortedProducts = () => {
-	const sliderRef = useRef<HTMLDivElement>(null);
-	const [maxScrollTotal, setMaxScrollTotal] = useState(0);
-	const [scrollLeftTotal, setScrollLeftTotal] = useState(0);
-	const [currentIndex, setCurrentIndex] = useState(0);
-	const [isLoading, setIsLoading] = useState<boolean>(true);
-	// WooCommerce API Category
-	const {
-		data: categories,
-		isLoading: categoryWpIsLoading,
-		isError: categoryIsError,
-	} = useCategories("");
+  const sliderRefs = useRef<Record<number, HTMLDivElement | null>>({});
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-	// State to hold products by category
-	const [categoryProductsMap, setCategoryProductsMap] = useState<{
-		[key: string]: ProductType[];
-	}>({});
+  const {
+    data: categories,
+    isLoading: categoryWpIsLoading,
+    isError: categoryIsError,
+  } = useCategories("");
 
-	useEffect(() => {
-		// Fetch products for each filtered category
-		const fetchCategoryProducts = async () => {
-			try {
-				// Set loading to true when starting the fetch
-				setIsLoading(true);
+  const [categoryProductsMap, setCategoryProductsMap] = useState<{
+    [key: string]: ProductType[];
+  }>({});
 
-				const filteredCategories = categories
-					?.filter((category: CategoryType) => category?.count > 0)
-					?.slice(0, 5);
+  useEffect(() => {
+    const fetchCategoryProducts = async () => {
+      setIsLoading(true);
+      try {
+        const filteredCategories = categories
+          ?.filter((category: CategoryType) => category?.count > 0)
+          ?.slice(0, 5);
 
-				if (filteredCategories) {
-					const productsPromises = filteredCategories.map(
-						async (category: CategoryType) => {
-							const response = await WooCommerce.get(
-								`products?category=${category?.id}`,
-							);
-							return { [category?.id]: response?.data }; // Return products mapped by category id
-						},
-					);
+        if (filteredCategories) {
+          const productsPromises = filteredCategories.map(
+            async (category: CategoryType) => {
+              const response = await WooCommerce.get(
+                `products?category=${category?.id}`
+              );
+              return { [category?.id]: response?.data };
+            }
+          );
+          const productsResults = await Promise.all(productsPromises);
+          const productsMap = productsResults.reduce(
+            (acc, result) => ({ ...acc, ...result }),
+            {}
+          );
+          setCategoryProductsMap(productsMap);
+        }
+      } catch (error) {
+        console.error("Error fetching category products:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-					const productsResults = await Promise.all(productsPromises);
+    if (categories?.length) fetchCategoryProducts();
+  }, [categories]);
 
-					// Update the state with products mapped by category
-					const productsMap = productsResults.reduce(
-						(acc, result) => ({ ...acc, ...result }),
-						{},
-					);
-					setCategoryProductsMap(productsMap);
-				}
-			} catch (error) {
-				console.error("Error fetching category products:", error);
-			} finally {
-				// Set loading to false when fetching is done
-				setIsLoading(false);
-			}
-		};
+  const handleScroll = (categoryId: number, direction: "next" | "prev") => {
+    const slider = sliderRefs.current[categoryId];
+    if (slider) {
+      const distance = 600;
+      const scrollAmount = direction === "next" ? distance : -distance;
+      slider.scrollLeft += scrollAmount;
+    }
+  };
 
-		if (categories?.length) {
-			fetchCategoryProducts();
-		}
-	}, [categories]);
+  return (
+    <div className="mb-8 lg:mb-16">
+      {isLoading && <MainLoader />}
+      {categories
+        ?.filter((category: CategoryType) => category?.count > 0)
+        ?.slice(0, 5)
+        ?.map((category: CategoryType) => {
+          const categoryId = category?.id;
+          const products = categoryProductsMap[categoryId] || [];
 
-	let TotalCategoryProductsMap: any;
-
-	const handleNext = () => {
-		if (sliderRef.current) {
-			const { scrollLeft, scrollWidth, clientWidth } = sliderRef.current;
-			const maxScroll = scrollWidth - clientWidth;
-			setScrollLeftTotal(scrollLeft);
-			setMaxScrollTotal(maxScroll);
-
-			sliderRef.current.scrollLeft += 600; // Adjust the scroll distance as needed
-			setCurrentIndex((prevIndex) =>
-				prevIndex < TotalCategoryProductsMap - 1 ? prevIndex + 1 : prevIndex,
-			);
-		}
-	};
-
-	const handlePrev = () => {
-		if (sliderRef.current) {
-			const { scrollLeft, scrollWidth, clientWidth } = sliderRef.current;
-			const maxScroll = scrollWidth - clientWidth;
-			setScrollLeftTotal(scrollLeft);
-			setMaxScrollTotal(maxScroll);
-			// console.log(scrollLeft);
-			if (scrollLeft > 0) {
-				sliderRef.current.scrollLeft -= 600; // Adjust the scroll distance as needed
-				setCurrentIndex((prevIndex) =>
-					prevIndex > 0 ? prevIndex - 1 : prevIndex,
-				);
-			}
-		}
-	};
-
-	return (
-		<div className='mb-8 lg:mb-16'>
-			<div className=''>
-				{isLoading && <MainLoader />}
-				{categories
-					?.filter((category: CategoryType) => category?.count > 0)
-					?.slice(0, 5)
-					?.map((category: CategoryType) => {
-						const TotalCategoryProductsMap =
-							categoryProductsMap[category?.id]?.length;
-						return (
-              <div
-                key={category?.id}
-                className="flex flex-col gap-5 sm:gap-16 justify-center mb-10 sm:mb-12"
-              >
-                <div className="w-full items-center flex justify-between px-4 ">
-                  <span className="text-[18px] border-b-2 border-[#7fc561] ">
-                    <span className="xs:hidden text-gray-500 text-[30px] font-normal mr-2">
-                      Supersaver
-                    </span>
-                    <Link
-                      href={`${
-                        "/category/" +
-                        convertToSlug(category?.name) +
-                        "-" +
-                        category?.id
-                      }`}
-                      dangerouslySetInnerHTML={{ __html: category?.name }}
-                      className="text-[18px] text-left text-gray-500 py-1 sm:text-3xl font-normal tracking-tighttext-[#7fc561] capitalize"
-                    />
+          return (
+            <div
+              key={categoryId}
+              className="flex flex-col gap-5 sm:gap-16 justify-center mb-10 sm:mb-12"
+            >
+              <div className="w-full items-center flex justify-between px-4 ">
+                <span className="text-[18px] border-b-2 border-[#7fc561] ">
+                  <span className="xs:hidden text-gray-500 text-[30px] font-normal mr-2">
+                    Supersaver
                   </span>
-
-                  <div className="xs:hidden flex items-center justify-center ">
-                    <Link
-                      href={`${
-                        "/category/" +
-                        convertToSlug(category?.name) +
-                        "-" +
-                        category?.id
-                      }`}
-                      className="mt-2 text-sm font-medium cursor-pointer text-[#303030] hover:underline"
-                    >
-                      view all
-                    </Link>
-                    <div className="mt-2 text-left">
-                      <IoChevronForward color="#7fc561" />
-                    </div>
-                  </div>
+                  <Link
+                    href={`/category/${convertToSlug(
+                      category?.name
+                    )}-${categoryId}`}
+                    dangerouslySetInnerHTML={{ __html: category?.name }}
+                    className="text-[18px] text-left text-gray-500 py-1 sm:text-3xl font-normal tracking-tighttext-[#7fc561] capitalize"
+                  />
+                </span>
+                <div className="xs:hidden md:block flex items-center justify-center ">
+                  <Link
+                    href={`/category/${convertToSlug(
+                      category?.name
+                    )}-${categoryId}`}
+                    className="mt-2 text-sm font-medium cursor-pointer text-[#303030] hover:underline"
+                  >
+                    View all
+                  </Link>
                 </div>
-                {/* Show loader when category products are loading */}
-                <Carousel
-                  totalDataNumber={TotalCategoryProductsMap}
-                  maxScrollTotal={maxScrollTotal}
-                  scrollLeftTotal={scrollLeftTotal}
-                  handleNext={handleNext}
-                  handlePrev={handlePrev}
-                >
-                  <div className="flex space-x-6 overflow-x-auto scroll-smooth overflow-y-hidden no-scrollbar max-w-[1256px]">
-                    {isLoading ? (
-                      <Loader /> // Show loader when data is being fetched
-                    ) : (
-                      <>
-                        {categoryProductsMap[category?.id]?.map(
-                          (product: ProductType) => (
-                            <ProductCard2
-                              key={product?.id}
-                              id={product?.id}
-                              image={product?.images[0]?.src}
-                              oldAmount={product?.regular_price}
-                              newAmount={product?.price}
-                              description={product?.name}
-                            />
-                          )
-                        )}
-                      </>
-                    )}
-                  </div>
-                </Carousel>
               </div>
-            );
-					})}
-			</div>
-		</div>
-	);
+
+              <Carousel
+                handleNext={() => handleScroll(categoryId, "next")}
+                handlePrev={() => handleScroll(categoryId, "prev")}
+                totalDataNumber={products.length}
+              >
+                <div
+                  ref={(el) => (sliderRefs.current[categoryId] = el)}
+                  className="flex space-x-6 overflow-x-auto scroll-smooth overflow-y-hidden no-scrollbar max-w-[1256px]"
+                >
+                  {isLoading ? (
+                    <Loader />
+                  ) : (
+                    products.map((product: ProductType) => (
+                      <ProductCard2
+                        key={product?.id}
+                        id={product?.id}
+                        image={product?.images[0]?.src}
+                        oldAmount={product?.regular_price}
+                        newAmount={product?.price}
+                        description={product?.name}
+                      />
+                    ))
+                  )}
+                </div>
+              </Carousel>
+            </div>
+          );
+        })}
+    </div>
+  );
 };
 
 export default SortedProducts;

@@ -1,4 +1,4 @@
-import { logoImage } from "@public/images";
+import Logo from "@public/images/header/Logo.png";
 import Picture from "@src/components/picture/Picture";
 import Link from "next/link";
 
@@ -8,16 +8,16 @@ interface LogoImageProps {
 
 export const LogoImage = ({ className }: LogoImageProps) => {
 	return (
-		<Link href='/'>
-			<Picture
-				src={logoImage}
-				alt='logo'
-				priority
-				loading='lazy'
-				className={`w-[150px] lg:w-[165px] xl:w-[196px] max-h-[40px] duration-300 hover:scale-105 transition-[.3] hover:animate-pulse ${className}`}
-			/>
-		</Link>
-	);
+    <Link href="/">
+      <Picture
+        src={Logo}
+        alt="logo"
+        priority
+        loading="lazy"
+        className={`max-h-[130px] duration-300 hover:scale-125 transition-[.3] hover:animate-pulse ${className}`}
+      />
+    </Link>
+  );
 };
 
 

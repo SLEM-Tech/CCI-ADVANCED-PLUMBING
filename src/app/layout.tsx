@@ -20,12 +20,14 @@ const montserrat = Montserrat({
 const { description, title } = SEODATA.default;
 export const metadata: Metadata = {
   title: {
-    absolute: "",
+    absolute: "CCI Advanced Plumbing Tech and Technical Company Ltd",
     default: "CCI Advanced Plumbing Tech and Technical Company Ltd",
     template: "",
   },
   description: description,
-  icons: SEODATA.defaultOGImage,
+  icons: {
+    icon: "/favicon.png", // or "/favicon.ico"
+  },
   openGraph: {
     images: [
       {

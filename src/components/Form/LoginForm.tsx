@@ -98,7 +98,7 @@ const LoginForm = () => {
 	});
 
 	return (
-		<div className='flex flex-col bg-white w-full max-w-[32rem] pt-5 pb-6 md:pb-10 px-3 md:px-10 shadow-lg rounded-xl'>
+		<div className='flex flex-col bg-white w-full max-w-[32rem] xs:mt-10 md:mt-0 pt-5 pb-6 md:pb-10 px-3 md:px-10 shadow-lg rounded-xl'>
 			<h4 className='text-base md:text-2xl uppercase font-[500]'>Login</h4>
 			<FormikProvider value={formik}>
 				<Form className='flex flex-col gap-2 md:gap-4'>
@@ -115,7 +115,7 @@ const LoginForm = () => {
 							id='email'
 							name='email'
 							placeholder='Enter your email address'
-							className={`w-full px-2 py-2 md:py-3 font-[400] text-xs md:text-sm rounded-md border border-secondary-800 outline-none transition-[.5] ease-in focus:border-transparent focus:ring-1 focus:ring-primary ${
+							className={`w-full px-2 py-2 md:py-3 font-[400] text-xs md:text-sm rounded-md border border-secondary-800 outline-none transition-[.5] ease-in focus:border-transparent focus:ring-1 focus:ring-[#54b22c] ${
 								formik.touched.email && formik.errors.email
 									? "border-red-500"
 									: "border-gray-300"
@@ -142,7 +142,7 @@ const LoginForm = () => {
 								id='password'
 								name='password'
 								placeholder='Enter your password'
-								className={`w-full px-2 py-2 md:py-3 font-[400] text-xs md:text-sm rounded-md border border-secondary-800 outline-none focus:border-transparent transition-[.5] ease-in focus:ring-1 focus:ring-primary ${
+								className={`w-full px-2 py-2 md:py-3 font-[400] text-xs md:text-sm rounded-md border border-secondary-800 outline-none focus:border-transparent transition-[.5] ease-in focus:ring-1 focus:ring-[#54b22c] ${
 									formik.touched.password && formik.errors.password
 										? "border-red-500"
 										: "border-gray-300"
@@ -158,9 +158,9 @@ const LoginForm = () => {
 								onClick={togglePasswordVisibility}
 							>
 								{showPassword ? (
-									<FaEye className='text-primary' />
+									<FaEye className='text-[#54b22c]' />
 								) : (
-									<FaEyeSlash className='text-primary' />
+									<FaEyeSlash className='text-[#54b22c]' />
 								)}
 							</span>
 						</div>
@@ -177,14 +177,14 @@ const LoginForm = () => {
 
 					<button
 						type='submit'
-						className={`flex items-center justify-center border relative bg-black2-100 text-white border-transparent hover:border-primary hover:bg-primary hover:text-white hover:border-transparent text-xs sm:text-sm leading-[1.4] font-semibold py-2.5 sm:py-3 w-full rounded-md gap-1.5 transition ${
+						className={`flex items-center justify-center border relative bg-black2-100 text-white border-transparent hover:border-[#54b22c] hover:bg-[#54b22c] hover:text-white hover:border-transparent text-xs sm:text-sm leading-[1.4] font-semibold py-2.5 sm:py-3 w-full rounded-md gap-1.5 transition ${
 							formik.isValid
-								? "bg-primary cursor-pointer"
-								: "bg-primary/60 cursor-not-allowed"
+								? "bg-[#54b22c] cursor-pointer"
+								: "bg-[#54b22c]/60 cursor-not-allowed"
 						} ${
 							formik.isSubmitting
-								? "bg-primary/60 cursor-not-allowed"
-								: "bg-primary cursor-pointer"
+								? "bg-[#54b22c]/60 cursor-not-allowed"
+								: "bg-[#54b22c] cursor-pointer"
 						}`}
 					>
 						<GoUnlock
@@ -201,7 +201,7 @@ const LoginForm = () => {
 						<span>Don&rsquo;t Have account?&nbsp;</span>
 						<span
 							onClick={() => router.push("/user/register")}
-							className='text-primary font-semibold hover:underline cursor-pointer transition underline-offset-4'
+							className='text-[#54b22c] font-semibold hover:underline cursor-pointer transition underline-offset-4'
 						>
 							Signup Here
 						</span>

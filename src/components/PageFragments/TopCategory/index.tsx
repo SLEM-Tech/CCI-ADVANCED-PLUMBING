@@ -15,11 +15,15 @@ export const TopCategorySection = ({ className = "" }) => {
   const { data: categories, isLoading } = useCategories("");
   const Categories = categories || [];
 
-  const visibleCategories = displayMore
-    ? Categories
-    : Categories?.filter(
-        (category:any) => category?.count > 0 || category?.name === "Uncategorized"
-      )?.slice(0, 5);
+ const visibleCategories = displayMore
+   ? Categories?.filter(
+       (category: any) =>
+         category?.count > 0 && category?.name !== "Uncategorized"
+     )
+   : Categories?.filter(
+       (category: any) =>
+         category?.count > 0 && category?.name !== "Uncategorized"
+     )?.slice(0, 5);
 
   const handleNext = () => {
     if (sliderRef.current) {

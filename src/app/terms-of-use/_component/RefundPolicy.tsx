@@ -6,224 +6,184 @@ const RefundPolicy = () => {
   const GeneralSettings: WooCommerceSetting[] = generalSettings;
 
   return (
-    <div className="text-[#667085]">
+    <div id="refundPolicy" className="text-[#667085]">
       <h3 className="font-semibold text-sm md:text-base xl:text-lg mb-2">
-        NEST AND WHEELS AUTO COMPONENTS LIMITED REFUND POLICY
+        REFUND POLICY - CCI ADVANCED PLUMBING TECH & TECHNICAL COMPANY
       </h3>
       <p className="text-xs md:text-sm xl:text-base mb-4">
-        This Refund Policy shall become effective from 30 May 2025 until updated
-        or reviewed.
+        Effective Date: {new Date().toLocaleDateString("en-GB")}
       </p>
 
       <p className="text-xs md:text-sm xl:text-base mb-4">
-        Welcome to{" "}
-        <strong> Nest and Wheels Auto Component Ltd (“Nest & Wheels”).</strong>{" "}
-        {""}
-        We are dedicated to customer satisfaction across all our product lines,
-        including motor parts, automotive fluids (e.g., motor oils), and vehicle
-        sales. This Refund Policy outlines the terms for returns, refunds, and
-        cancellations for purchases processed via any of our payment
-        facilitators.
+        At CCI Advanced Plumbing Tech and Technical Company Ltd, we are
+        committed to delivering exceptional plumbing services, quality
+        equipment, and comprehensive training programs that meet professional
+        standards and exceed customer expectations. Our refund policy ensures
+        fair treatment while maintaining service quality.
       </p>
 
-      <hr className="my-4 border-gray-300" />
-
-      <ol className="list-item space-y-2 leading-[1.8] text-xs md:text-sm xl:text-base">
+      <ul className="list-disc pl-5 space-y-3 leading-[1.8] text-xs md:text-sm xl:text-base">
         <li>
-          <span className="font-bold">1. Product Categories Covered</span>{" "}
-          <br></br>
-          <h6 className="leading-[1.8]">
-            This policy applies to the following types of purchases:
-          </h6>
+          <span className="font-medium">1. Plumbing Services Refunds</span>
           <ul className="list-disc pl-5 mt-1 space-y-1">
             <li>
-              <span className="font-medium text-md">Motor Parts:</span>{" "}
-              Aftermarket or OEM parts including filters, spark plugs,
-              batteries, etc.
+              Full refund if work fails to meet professional plumbing standards
             </li>
             <li>
-              <span className="font-medium text-md">Motor Oils & Fluids: </span>{" "}
-              Engine oil, transmission fluid, coolant, etc.
+              Prorated refunds for incomplete work due to our inability to
+              proceed
             </li>
             <li>
-              <span className="font-medium text-md">Vehicle Sales: </span> New
-              or used vehicles, including online deposits and down payments.
+              No-cost remedial work for any defects within 12-month warranty
+              period
+            </li>
+            <li>
+              Emergency service refunds if response time exceeds guaranteed
+              timeframe
+            </li>
+            <li>
+              Client-initiated cancellations subject to materials purchased and
+              work completed
             </li>
           </ul>
         </li>
 
         <li>
-          <span className="font-bold">2. Refunds for Motor Parts</span>
-          <p className="mt-1">
-            You may request a refund under the following conditions:
-          </p>
-          <ul className="list-disc pl-5 mt-1 space-y-1">
-            <li>The part is defective or damaged upon delivery</li>
-            <li>You received the wrong item</li>
-            <li>
-              The part does not match the vehicle compatibility stated at
-              purchase.
-            </li>
-          </ul>
-
-          <p className="font-bold">Eligibility Requirements:</p>
+          <span className="font-medium">2. Equipment & Tools Refunds</span>
           <ul className="list-disc pl-5 mt-1 space-y-1">
             <li>
-              Return request must be made within
-              <strong>5 &ndash; 7 days</strong> after delivery.
+              30-day return policy for unused equipment in original packaging
             </li>
             <li>
-              Item must be <strong>unused, uninstalled,</strong> and in original
-              packaging
+              Full refund for defective or damaged equipment upon delivery
             </li>
-            <li>Include proof of purchase</li>
-          </ul>
-
-          <p className="font-bold">Non-Refundable Motor Parts:</p>
-          <ul className="list-disc pl-5 mt-1 space-y-1">
-            <li>Installed or used parts</li>
-            <li>Items damaged due to improper installation</li>
-            <li>Special orders or non-stocked parts</li>
+            <li>
+              Manufacturer warranty claims processed at no charge to customer
+            </li>
+            <li>
+              Trade-in credit available for equipment upgrades within 90 days
+            </li>
+            <li>Custom or special-order items refundable only if defective</li>
           </ul>
         </li>
 
         <li>
-          <span className="font-bold">3. Items Not Eligible for Refund</span>
-          <p className="mt-1">
-            Due to safety, legal, and hygiene considerations, we do{" "}
-            <strong>not</strong> accept returns for motor oils and fluids once
-            delivered, except in cases of:
-          </p>
+          <span className="font-medium">3. Training Program Refunds</span>
           <ul className="list-disc pl-5 mt-1 space-y-1">
-            <li>Incorrect product shipped</li>
-            <li>Product leakage or damage in transit</li>
-            <li>Expired product (if not indicated at purchase)</li>
-          </ul>
-
-          <p className="font-bold">Return Eligibility:</p>
-          <ul className="list-disc pl-5 mt-1 space-y-1">
+            <li>Full refund if training cancelled by CCI Advanced Plumbing</li>
             <li>
-              Must be <strong>unopened, sealed,</strong> and reported within{" "}
-              <strong>5 days</strong> of delivery
+              Prorated refund for training programs not meeting advertised
+              curriculum
             </li>
-            <li>Photos must be provided as proof of damage or defect</li>
+            <li>
+              Transfer to alternative training dates at no additional cost
+            </li>
+            <li>
+              Partial refunds for individual participants unable to complete
+              programs
+            </li>
+            <li>
+              Corporate training refunds based on delivered content and services
+            </li>
           </ul>
         </li>
 
         <li>
-          <span className="font-bold">
-            4. Refunds and Cancellations for Car Sales
+          <span className="font-medium">
+            4. Non-Refundable Services & Items
           </span>
-          <p className="mt-1">
-            Car purchases (including deposits or down payments made online) are
-            subject to the following:
-          </p>
-          <p className="font-bold">Deposits/Down Payments:</p>
           <ul className="list-disc pl-5 mt-1 space-y-1">
             <li>
-              Refundable <strong>only if the sale is not finalized</strong> due
-              to reasons outside the buyer&apos;s control (e.g., financing
-              denial, seller withdrawal)
+              Completed plumbing work that meets professional standards and
+              client approval
             </li>
+            <li>Consultation fees and diagnostic services already performed</li>
             <li>
-              Cancellations initiated by the buyer may incur a{" "}
-              <strong>non-refundable fee</strong> ([e.g., 5&ndash;10%] of the
-              deposit)
+              Training programs successfully completed with certification issued
+            </li>
+            <li>Used or damaged equipment beyond normal handling</li>
+            <li>
+              Third-party materials and permits obtained for client projects
             </li>
           </ul>
         </li>
 
         <li>
-          <span className="font-bold">5. Refund Process</span>
-          <p className="mt-1">To request a return or refund:</p>
-          <p className="mt-1">
-            <span className="font-semibold">Email:</span>{" "}
-            amarachinjoku@nestandwheels.com.ng
-          </p>
-          <p className="mt-1">
-            <span className="font-semibold">Phone:</span> 09061139596
-          </p>
-          <p className="mt-1">
-            <span className="font-semibold">Return Portal:</span>{" "}
-            https://www.nestandwheels.com/
-          </p>
-          <p className="mt-1">Please provide:</p>
+          <span className="font-medium">5. Refund Request Process</span>
+          <p className="mt-1">To request a refund:</p>
           <ul className="list-disc pl-5 mt-1 space-y-1">
-            <li>Order number or receipt</li>
-            <li>Reason for return</li>
-            <li>Photos (if applicable)</li>
-          </ul>
-          <p className="mt-1">
-            <p className="mt-1">
-              We will review your request and respond within{" "}
-              <strong> 3&ndash;5 business days.</strong>
-            </p>
-          </p>
-        </li>
-
-        <li>
-          <span className="font-bold">6. Return Shipping</span>
-          <ul className="list-disc pl-5 mt-1 space-y-1">
+            <li>Email: refunds@cciplumbing.com.ng</li>
+            <li>Phone: +234-801-234-5009</li>
+            <li>Provide original service agreement or purchase receipt</li>
             <li>
-              For defective, damaged, or incorrect items, return shipping will
-              be covered by us.
+              Include detailed explanation with supporting photos for defects
             </li>
-            <li>
-              For other approved returns, the customer is responsible for return
-              shipping costs.
-            </li>
-            <li>Use a trackable shipping method and retain proof of return.</li>
+            <li>Allow access for inspection of plumbing work if necessary</li>
           </ul>
         </li>
 
         <li>
-          <span className="font-bold">7. Refund Method & Timeline</span>
-          <p className="mt-1">
-            Approved refunds will be processed via our payment facilitator to
-            the original payment method within 7&ndash;14 business days,
-            depending on your bank/card provider.
-          </p>
+          <span className="font-medium">6. Refund Assessment & Processing</span>
+          <ul className="list-disc pl-5 mt-1 space-y-1">
+            <li>
+              Service refund requests reviewed by senior technician within 2
+              days
+            </li>
+            <li>Equipment returns inspected within 24 hours of receipt</li>
+            <li>
+              Training refunds assessed based on attendance and completion
+              records
+            </li>
+            <li>Approved refunds processed within 7-10 business days</li>
+            <li>Complex cases may require additional assessment time</li>
+          </ul>
         </li>
 
         <li>
-          <span className="font-bold">8. Dispute Resolution</span>
-          <p className="mt-1">
-            If you are not satisfied with the outcome of your refund request,
-            you may initiate a formal dispute through the payment facilitator
-            utilized or your card issuer. However, we recommend contacting us
-            first to resolve the matter directly.
-          </p>
+          <span className="font-medium">7. Alternative Resolutions</span>
+          <ul className="list-disc pl-5 mt-1 space-y-1">
+            <li>
+              Corrective work performed at no charge for service quality issues
+            </li>
+            <li>Equipment exchange for equivalent or upgraded models</li>
+            <li>Training program transfers to alternative dates or formats</li>
+            <li>
+              Service credits applied to future plumbing work or equipment
+              purchases
+            </li>
+            <li>Extended warranty coverage for equipment or service issues</li>
+          </ul>
         </li>
 
         <li>
-          <span className="font-bold">9. Policy Updates/Review</span>
-          <p className="mt-1">
-            Next & Wheels reserves the right to amend this Refund Policy at any
-            time. Any updates will be posted to our website and become effective
-            immediately.
-          </p>
+          <span className="font-medium">8. Emergency & Insurance Claims</span>
+          <ul className="list-disc pl-5 mt-1 space-y-1">
+            <li>
+              Emergency service guarantees with automatic refunds for missed
+              commitments
+            </li>
+            <li>Insurance claim assistance for covered plumbing damage</li>
+            <li>
+              Third-party inspection services available for dispute resolution
+            </li>
+            <li>Professional liability insurance covers workmanship errors</li>
+          </ul>
         </li>
-      </ol>
+      </ul>
 
       <div className="mt-6 pt-4 border-t border-gray-200">
         <h4 className="font-semibold text-xs md:text-sm xl:text-base mb-2">
-          Contact Us via the following contact details:
+          Contact Information
         </h4>
-        <p className="text-xs font-semibold md:text-sm xl:text-base">
-          Nest Wheels Autos.
+        <p className="text-xs md:text-sm xl:text-base">
+          For refunds and service resolution:
         </p>
         <ul className="list-disc pl-5 mt-2 space-y-1 text-xs md:text-sm xl:text-base">
-          <li>
-            <span className="font-semibold">Email:</span>{" "}
-            amarachinjoku@nestandwheels.com.ng
-          </li>
-          <li>
-            <span className="font-semibold">Phone:</span> 09061139596
-          </li>
-          <li>
-            <span className="font-semibold">Website:</span>{" "}
-            https://www.nestandwheels.com/
-          </li>
+          <li>CCI Advanced Plumbing Tech and Technical Company Ltd</li>
+          <li>Email: refunds@cciplumbing.com.ng</li>
+          <li>Service Manager: service@cciplumbing.com.ng</li>
+          <li>Phone: +234-801-234-5009</li>
+          <li>Website: www.cciplumbing.com.ng</li>
         </ul>
       </div>
     </div>

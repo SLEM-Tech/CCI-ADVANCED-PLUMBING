@@ -1,3 +1,5 @@
+"use client";
+
 import { useGeneralSettings } from "@src/components/lib/woocommerce";
 import React from "react";
 

@@ -1,4 +1,6 @@
-import React from 'react'
+"use client";
+
+import React from "react";
 
 const PrivacyPolicy = () => {
   return (
@@ -109,6 +111,6 @@ const PrivacyPolicy = () => {
       </p>
     </div>
   );
-}
+};
 
-export default PrivacyPolicy
+export default PrivacyPolicy;

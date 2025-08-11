@@ -110,7 +110,7 @@ const RefundPolicy = () => {
           </ul>
         </li>
 
-        <li>
+        {/* <li>
           <span className="font-medium">5. Refund Request Process</span>
           <p className="mt-1">To request a refund:</p>
           <ul className="list-disc pl-5 mt-1 space-y-1">
@@ -122,7 +122,7 @@ const RefundPolicy = () => {
             </li>
             <li>Allow access for inspection of plumbing work if necessary</li>
           </ul>
-        </li>
+        </li> */}
 
         <li>
           <span className="font-medium">6. Refund Assessment & Processing</span>
@@ -173,7 +173,7 @@ const RefundPolicy = () => {
         </li>
       </ul>
 
-      <div className="mt-6 pt-4 border-t border-gray-200">
+      {/* <div className="mt-6 pt-4 border-t border-gray-200">
         <h4 className="font-semibold text-xs md:text-sm xl:text-base mb-2">
           Contact Information
         </h4>
@@ -187,7 +187,7 @@ const RefundPolicy = () => {
           <li>Phone: +234-801-234-5009</li>
           <li>Website: www.cciplumbing.com.ng</li>
         </ul>
-      </div>
+      </div> */}
     </div>
   );
 };

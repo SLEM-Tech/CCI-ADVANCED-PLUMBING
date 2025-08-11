@@ -106,8 +106,8 @@ const PrivacyPolicy = () => {
         records, request corrections, and understand data usage. Service
         documentation can be provided for warranty and insurance purposes.
         Training records and certifications remain accessible for verification.
-        For privacy inquiries related to our services, contact
-        privacy@cciplumbing.com.ng.
+        {/* For privacy inquiries related to our services, contact
+        privacy@cciplumbing.com.ng. */}
       </p>
     </div>
   );

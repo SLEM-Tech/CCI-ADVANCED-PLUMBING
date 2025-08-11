@@ -85,16 +85,16 @@ const ProductCard2 = ({
           <Picture
             src={image || ""}
             alt={`${description}-image`}
-            className="absolute top-[-40px] object-contain object-center h-full w-full"
+            className="absolute top-[-40px] object-contain object-center h-[85%] w-full"
             loading="eager"
           />
-          <div className="bg-[#54b22c] text-white text-[10px] absolute top-0 right-0 rounded-tr-large rounded-bl-large max-w-10 p-3">
+          {/* <div className="bg-[#54b22c] text-white text-[10px] absolute top-0 right-0 rounded-tr-large rounded-bl-large max-w-10 p-3">
             50% OFF
-          </div>
+          </div> */}
         </Link>
       </div>
 
-      <div className="flex flex-col items-center px-2 w-full">
+      <div className="flex flex-col items-center px-2 mt-[-90px] w-full">
         <Link
           href={`/home-item/product/${slugDesc}-${id}`}
           dangerouslySetInnerHTML={{ __html: description }}

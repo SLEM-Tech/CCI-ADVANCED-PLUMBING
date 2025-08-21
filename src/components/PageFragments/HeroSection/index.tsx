@@ -55,11 +55,11 @@ export const HeroSection = () => {
           interval={15000}
         >
           <HeroSlide
-            featureMessage="50% off new plumbing items"
+            featureMessage="Top-Grade Plumbing Supplies, Built to Last"
             imgPath={img1}
           />
           <HeroSlide
-            featureMessage="50% off new plumbing items"
+            featureMessage="Your One-Stop Shop for Quality Plumbing"
             imgPath={img1}
           />
         </Carousel>

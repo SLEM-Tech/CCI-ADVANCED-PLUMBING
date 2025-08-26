@@ -434,7 +434,7 @@ const Header = () => {
       >
         <div className="mt-4 flex w-full justify-between items-center">
           <Link href="/" className="text-4xl font-bold">
-            Logo
+            <LogoImage className="w-[75px] " />
           </Link>
 
           <GrClose
